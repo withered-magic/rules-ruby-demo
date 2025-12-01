@@ -1,0 +1,22 @@
+load("@rules_ruby//ruby:defs.bzl", "rb_binary", "rb_library")
+
+rb_library(
+    name = "lib",
+    srcs = glob(["**/*.rb"]),
+)
+
+rb_binary(
+    name = "bin",
+    main = "app.rb",
+    deps = [
+        ":lib",
+        "@bundle",
+    ],
+)
+
+genrule(
+    name = "foo",
+    outs = ["foo.txt"],
+    cmd = "$(location :bin)  \"$@\"",
+    tools = [":bin"],
+)

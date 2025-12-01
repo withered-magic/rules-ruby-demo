@@ -1,0 +1,29 @@
+module(name = "rules_ruby_demo", version = "0.1.0")
+
+bazel_dep(name = "rules_ruby", version = "0.21.1")
+local_path_override(
+    module_name = "rules_ruby",
+    path = "../../thirdparty/rules_ruby",
+)
+# git_override(
+#     module_name = "rules_ruby",
+#     remote = "https://github.com/withered-magic/rules_ruby.git",
+#     commit = "0dff53bb44e48da80e2104ec94b4fd205480eb16",
+# )
+
+ruby = use_extension("@rules_ruby//ruby:extensions.bzl", "ruby")
+ruby.toolchain(
+    name = "ruby",
+    version = "3.2.9",
+)
+use_repo(ruby, "ruby")
+
+ruby.bundle_fetch(
+    name = "bundle",
+    gemfile = "//:Gemfile",
+    gemfile_lock = "//:Gemfile.lock",
+    skip_get_executables_gems = ["sorbet-static-and-runtime"],
+)
+use_repo(ruby, "bundle", "ruby_toolchains")
+
+register_toolchains("@ruby_toolchains//:all")
