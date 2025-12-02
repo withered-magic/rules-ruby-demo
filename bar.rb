@@ -1,0 +1,1 @@
+/home/mana5090suprimlc/learn/rules-ruby-demo/foo/bar.rb

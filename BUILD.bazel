@@ -2,7 +2,9 @@ load("@rules_ruby//ruby:defs.bzl", "rb_binary", "rb_library")
 
 rb_library(
     name = "lib",
-    srcs = glob(["**/*.rb"]),
+    srcs = [
+        "app.rb",
+    ],
 )
 
 rb_binary(

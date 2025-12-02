@@ -1,5 +1,1 @@
-require 'sorbet-runtime'
-require 'sorbet-schema'
-require 'sorbet-struct-comparable'
-
-STDERR.puts $:
+require_relative '/home/mana5090suprimlc/learn/rules-ruby-demo/bar.rb'
